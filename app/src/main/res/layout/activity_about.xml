@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+<android.support.constraint.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.AboutActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarAboutLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarAboutId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:theme="@style/ToolbarAboutStyle"
+            app:title="EmpresaNome"
+            app:titleTextColor="@android:color/white"
+            app:navigationIcon="@drawable/ic_arrow_back">
+
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+
+    <ImageView
+        android:id="@+id/imageAboutEntepriseId"
+        android:layout_width="283dp"
+        android:layout_height="167dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarAboutLayout" />
+
+    <TextView
+        android:id="@+id/infoEnterpriseId"
+        android:layout_width="265dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="7dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="14dp"
+        android:text="@string/loren_info"
+        android:textColor="@color/text_gray"
+        app:layout_constraintEnd_toEndOf="@+id/imageAboutEntepriseId"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageAboutEntepriseId"
+        app:layout_constraintTop_toBottomOf="@+id/imageAboutEntepriseId" />
+
+
+</android.support.constraint.ConstraintLayout>
+
+</ScrollView>
