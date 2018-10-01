@@ -1,6 +1,5 @@
 package pedro.com.ioasysteste.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -9,8 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.target.Target;
 
 import pedro.com.ioasysteste.R;
 import pedro.com.ioasysteste.controllers.ApiController;
@@ -52,7 +49,6 @@ public class AboutActivity extends AppCompatActivity {
         toolbarAbout.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 finish();
             }
         });

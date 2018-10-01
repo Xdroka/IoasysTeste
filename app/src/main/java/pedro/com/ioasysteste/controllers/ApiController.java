@@ -48,14 +48,15 @@ public class ApiController {
         authCall.enqueue(new Callback<AuthRequest>() {
             @Override
             public void onResponse(Call<AuthRequest> call, Response<AuthRequest> response) {
-                setmAuthenticationResponse(response.isSuccessful()); //esse atributo será usado na view
-                if (ismAuthenticationResponse()) {
+                if (response.isSuccessful()) {
                     mHeaderAuth = new HeaderAuth(
                             response.headers().get("access-token"),
                             response.headers().get("uid"),
                             response.headers().get("client")
                     );
                     BindWithActivities.toHomeActivity(mHeaderAuth);
+                } else {
+                    BindWithActivities.errorLogin();
                 }
             }
 
@@ -80,8 +81,8 @@ public class ApiController {
             @Override
             public void onResponse(Call<ListEnterprise> call, Response<ListEnterprise> response) {
                 if (!response.isSuccessful()) return;
-                    mEnterpriseList.addAll(response.body().getEnterprises());
-                    BindWithActivities.setupRecycler(mEnterpriseList);
+                mEnterpriseList.addAll(response.body().getEnterprises());
+                BindWithActivities.setupRecycler(mEnterpriseList);
             }
 
             @Override
@@ -91,13 +92,6 @@ public class ApiController {
         });
     }
 
-    public void setmAuthenticationResponse(boolean mAuthenticationResponse) {
-        this.mAuthenticationResponse = mAuthenticationResponse;
-    }
-
-    public boolean ismAuthenticationResponse() {
-        return mAuthenticationResponse;
-    }
 
 }
 

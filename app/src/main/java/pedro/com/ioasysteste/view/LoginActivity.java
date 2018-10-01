@@ -22,53 +22,37 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        BindWithActivities.sContext = getApplicationContext();
-
-        //remover isso abaixo
-        callingAuthenticationAPI();
-
         mSiginButton = findViewById(R.id.siginButtonId);
         mEmailEditText = findViewById(R.id.emailEditTextId);
         mPasswordEditText = findViewById(R.id.passwordEditTextId);
 
-        mPasswordEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    mPasswordEditText.clearFocus();
-                    mSiginButton.requestFocus();
-                }
-            }
-        });
+        BindWithActivities.sContext = getApplicationContext();
+        BindWithActivities.sEmailEditText = mEmailEditText;
+        BindWithActivities.sPasswordEditText = mPasswordEditText;
 
         mSiginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mEmailEditText.setError(null);
                 if (isEmail(mEmailEditText.getText().toString()) && isPassword()) {
-
-                    if (!callingAuthenticationAPI()) {//pega o resultado da autenticação
-                        mEmailEditText.setError("Verifique se o email está correto");
-                        mPasswordEditText.setError("Verifique se a senha está correta");
-                    }
-
+                    callingAuthenticationAPI();
+                } else {
+                    mEmailEditText.setError("Email Ínvalido");
                 }
 
             }
-        });//fechando o Listener do botão entrar
+        });
 
     }
 
-    private boolean callingAuthenticationAPI() {
+    private void callingAuthenticationAPI() {
         ApiController apiController = new ApiController();
         apiController.setUser(mEmailEditText.getText().toString(),
                 mPasswordEditText.getText().toString()
         );
 //        apiController.setUser("testeapple@ioasys.com.br", "12341234");
         apiController.callingAuth();
-        return apiController.ismAuthenticationResponse();
     }
-
 
     private boolean isPassword() {
         boolean isPassword = !mPasswordEditText.getText().toString().isEmpty();
@@ -81,7 +65,6 @@ public class LoginActivity extends AppCompatActivity {
     private boolean isEmail(String email) {
         String regex = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-        mEmailEditText.setError("Email Ínvalido");
         return pattern.matcher(email).find();
     }
 

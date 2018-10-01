@@ -24,7 +24,6 @@ public class RecylerAdapter extends RecyclerView.Adapter<RecyclerHolder> {
         this.mEnterprises = Enterprises;
     }
 
-
     @NonNull
     @Override
     public RecyclerHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -55,7 +54,6 @@ public class RecylerAdapter extends RecyclerView.Adapter<RecyclerHolder> {
             );
         }
 
-
         holder.pItemCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,9 +61,7 @@ public class RecylerAdapter extends RecyclerView.Adapter<RecyclerHolder> {
             }
         });
 
-
     }
-
 
     @Override
     public int getItemCount() {

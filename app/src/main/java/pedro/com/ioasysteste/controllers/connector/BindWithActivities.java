@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.List;
@@ -18,14 +19,16 @@ import pedro.com.ioasysteste.view.RecylerAdapter;
 public class BindWithActivities {
     public static Context sContext;
     public static RecyclerView sRecyclerView;
+    public static EditText sEmailEditText;
+    public static EditText sPasswordEditText;
 
     public static void toastMessage(String msg) {
-        try {
-            Toast.makeText(sContext, msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(sContext, msg, Toast.LENGTH_SHORT).show();
+    }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public static void errorLogin() {
+        sEmailEditText.setError("Verifique se o email está correto");
+        sPasswordEditText.setError("Verifique se a senha está correta");
     }
 
     public static void setupRecycler(List<Enterprise> enterpriseList) {
