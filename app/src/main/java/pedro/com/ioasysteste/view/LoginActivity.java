@@ -1,11 +1,9 @@
 package pedro.com.ioasysteste.view;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 
 import java.util.regex.Pattern;
@@ -47,14 +45,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mEmailEditText.setError(null);
-//                if (isEmail(mEmailEditText.getText().toString()) && isPassword()) {
+                if (isEmail(mEmailEditText.getText().toString()) && isPassword()) {
 
-                if (!callingAuthenticationAPI()) {//pega o resultado da autenticação
-                    mEmailEditText.setError("Verifique se o email está correto");
-                    mPasswordEditText.setError("Verifique se a senha está correta");
+                    if (!callingAuthenticationAPI()) {//pega o resultado da autenticação
+                        mEmailEditText.setError("Verifique se o email está correto");
+                        mPasswordEditText.setError("Verifique se a senha está correta");
+                    }
+
                 }
-
-//                }
 
             }
         });//fechando o Listener do botão entrar
@@ -63,10 +61,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean callingAuthenticationAPI() {
         ApiController apiController = new ApiController();
-//        apiController.setUser(mEmailEditText.getText().toString(),
-//                                mPasswordEditText.getText().toString()
-//                        );
-        apiController.setUser("testeapple@ioasys.com.br", "12341234");
+        apiController.setUser(mEmailEditText.getText().toString(),
+                mPasswordEditText.getText().toString()
+        );
+//        apiController.setUser("testeapple@ioasys.com.br", "12341234");
         apiController.callingAuth();
         return apiController.ismAuthenticationResponse();
     }
