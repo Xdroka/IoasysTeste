@@ -43,7 +43,6 @@ public class BindWithActivities {
         apiController.findEnterpriseByName(enterpriseName, mheaderAuth);
     }
 
-
     public static void toHomeActivity(HeaderAuth headerAuth) {
         Intent intent = new Intent(sContext, HomeActivity.class);
         intent.putExtra("access-token", headerAuth.getAcess_token());

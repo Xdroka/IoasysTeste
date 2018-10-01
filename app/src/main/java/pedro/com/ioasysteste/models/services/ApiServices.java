@@ -18,7 +18,8 @@ public interface ApiServices {
     Call<AuthRequest> authCall(@Body User user);
 
     @GET("enterprises")
-    Call<ListEnterprise> findEnterpriseByName(@Query("name") String nameEnterprise
-            , @HeaderMap Map<String, String> headers);
+    Call<ListEnterprise> findEnterpriseByName(@Query("name") String nameEnterprise,
+                                              @HeaderMap Map<String, String> headers
+                         );
 
 }
