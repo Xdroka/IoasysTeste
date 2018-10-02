@@ -41,11 +41,12 @@ public class RecylerAdapter extends RecyclerView.Adapter<RecyclerHolder> {
         if (mEnterprises.get(position).getPhoto() != null
                 && (!mEnterprises.get(position).getPhoto().toString().equals(""))) {
 
-            Target<GlideDrawable> glide = Glide.with(BindWithActivities.sContext)
+            Glide.with(BindWithActivities.sContext)
                     .load(ApiController.BASE_URL + mEnterprises.get(position).getPhoto().toString())
                     .placeholder(R.drawable.loading)
                     .error(R.drawable.download)
                     .into(holder.pEnterprisePhotoImageView);
+
         } else {
             holder.pEnterprisePhotoImageView.setImageDrawable(
                     BindWithActivities.sContext.getDrawable(

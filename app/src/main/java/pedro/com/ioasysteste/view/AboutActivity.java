@@ -58,6 +58,7 @@ public class AboutActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (pBundle.containsKey("photoEnterprise") && !mPhotoWasDonwloaded) {
                     downloadPhoto(pBundle.getString("photoEnterprise"));
+                    return;
                 }
             }
         });
@@ -67,7 +68,7 @@ public class AboutActivity extends AppCompatActivity {
         mPhotoWasDonwloaded = Glide.with(getApplicationContext())
                 .load(ApiController.BASE_URL + photoUrl)
                 .placeholder(R.drawable.loading)
-                .error(R.drawable.download)
+                .error(R.drawable.download_icon)
                 .into(mPhotoEnterprise).getRequest().isComplete();
     }
 

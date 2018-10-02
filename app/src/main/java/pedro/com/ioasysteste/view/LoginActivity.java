@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mEmailEditText.setError(null);
-                if (isEmail(mEmailEditText.getText().toString()) && isPassword()) {
+                if (isEmail(mEmailEditText.getText().toString())) {
                     callingAuthenticationAPI();
                 } else {
                     mEmailEditText.setError("Email Ínvalido");
@@ -52,14 +52,6 @@ public class LoginActivity extends AppCompatActivity {
         );
 //        apiController.setUser("testeapple@ioasys.com.br", "12341234");
         apiController.callingAuth();
-    }
-
-    private boolean isPassword() {
-        boolean isPassword = !mPasswordEditText.getText().toString().isEmpty();
-        if (!isPassword) {
-            mPasswordEditText.setError("Senha Vazia");
-        }
-        return isPassword;
     }
 
     private boolean isEmail(String email) {

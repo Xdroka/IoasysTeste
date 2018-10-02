@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
 
@@ -50,11 +51,13 @@
         android:id="@+id/infoEnterpriseId"
         android:layout_width="265dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
         android:layout_marginEnd="7dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="14dp"
         android:text="@string/loren_info"
         android:textColor="@color/text_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageAboutEntepriseId"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/imageAboutEntepriseId"

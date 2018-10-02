@@ -36,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
         BindWithActivities.sContext = getApplicationContext();
 
         setSupportActionBar(mToolbarSearch);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -63,6 +63,7 @@ public class HomeActivity extends AppCompatActivity {
 
         if (mSearchView != null) {
             mSearchView.setQueryHint("Pesquisar");
+
             mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
