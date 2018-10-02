@@ -20,7 +20,8 @@
             android:layout_marginStart="16dp"
             android:backgroundTint="@color/cardview_dark_background"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/todo" />
 
         <TextView
             android:id="@+id/enterpriseNameId"
@@ -28,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
-            android:text="Nome da Empresa"
+            android:text="@string/enterprise_name"
             android:textColor="@android:color/background_dark"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/enterprisePhotoId"
@@ -40,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
-            android:text="Tipo da Empresa"
+            android:text="@string/enterprise_type"
             android:textColor="@color/gray"
             android:textStyle="italic"
             app:layout_constraintStart_toEndOf="@+id/enterprisePhotoId"
@@ -52,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
-            android:text="País da empresa"
+            android:text="@string/enterprise_country"
             android:textColor="@color/gray"
             android:textStyle="italic"
             app:layout_constraintStart_toEndOf="@+id/enterprisePhotoId"

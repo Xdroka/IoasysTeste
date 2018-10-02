@@ -1,7 +1,6 @@
 package pedro.com.ioasysteste.view;
 
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -13,27 +12,27 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import pedro.com.ioasysteste.R;
-import pedro.com.ioasysteste.controllers.connector.BindWithActivities;
+import pedro.com.ioasysteste.controllers.ApiController;
 import pedro.com.ioasysteste.models.data.HeaderAuth;
+import pedro.com.ioasysteste.view.connector.BindWithActivities;
 
 public class HomeActivity extends AppCompatActivity {
     private SearchView mSearchView;
     private TextView mInfoTextView;
     private HeaderAuth mheaderAuth;
-    private RecyclerView pRecyclerView;
-    private Toolbar mToolbarSearch;
+    private BindWithActivities bind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        mToolbarSearch = findViewById(R.id.toolbarSearchId);
+        Toolbar mToolbarSearch = findViewById(R.id.toolbarSearchId);
         mInfoTextView = findViewById(R.id.infoTextViewId);
-        pRecyclerView = findViewById(R.id.recyclerViewId);
+        RecyclerView pRecyclerView = findViewById(R.id.recyclerViewId);
 
-        BindWithActivities.sRecyclerView = pRecyclerView;
-        BindWithActivities.sContext = getApplicationContext();
+        bind = new BindWithActivities(this);
+        bind.setmRecyclerView(pRecyclerView);
 
         setSupportActionBar(mToolbarSearch);
 //        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -50,7 +49,6 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         pRecyclerView.setNestedScrollingEnabled(false);
-
     }
 
     @Override
@@ -67,24 +65,28 @@ public class HomeActivity extends AppCompatActivity {
             mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
-//                    sendName(query);
-                    // mSearchView.setEnabled(false);
+                    sendName(query);
                     InputMethodManager imm = (InputMethodManager) getApplicationContext()
                             .getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(mSearchView.getWindowToken(), 0);
+                    if (imm != null) {
+                        imm.hideSoftInputFromWindow(mSearchView.getWindowToken(), 0);
+                    }
                     return false;
                 }
 
                 @Override
                 public boolean onQueryTextChange(String newText) {
                     mInfoTextView.setText("");
-                    BindWithActivities.sendName(newText, mheaderAuth);
                     return false;
                 }
             });
         }
 
         return true;
+    }
+    public void sendName(String enterpriseName) {
+        ApiController apiController = new ApiController();
+        apiController.findEnterpriseByName(enterpriseName, mheaderAuth, bind);
     }
 
 }

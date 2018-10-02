@@ -11,10 +11,8 @@ import com.bumptech.glide.Glide;
 
 import pedro.com.ioasysteste.R;
 import pedro.com.ioasysteste.controllers.ApiController;
-import pedro.com.ioasysteste.controllers.connector.BindWithActivities;
 
 public class AboutActivity extends AppCompatActivity {
-    private TextView mInfoEnterpriseTextView;
     private ImageView mPhotoEnterprise;
     private Bundle pBundle;
     private boolean mPhotoWasDonwloaded = false;
@@ -28,11 +26,11 @@ public class AboutActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        mInfoEnterpriseTextView = findViewById(R.id.infoEnterpriseId);
+        TextView mInfoEnterpriseTextView = findViewById(R.id.infoEnterpriseId);
         mPhotoEnterprise = findViewById(R.id.imageAboutEntepriseId);
 
         pBundle = getIntent().getExtras();
-        if (!pBundle.isEmpty()) {
+        if (pBundle != null && !pBundle.isEmpty()) {
             toolbarAbout.setTitle(pBundle.getString("nameEnterprise"));
             mInfoEnterpriseTextView.setText(pBundle.getString("infoEnterprise"));
             String photoUrl = pBundle.getString("photoEnterprise");
@@ -43,8 +41,6 @@ public class AboutActivity extends AppCompatActivity {
                 mPhotoEnterprise.setImageDrawable(getDrawable(R.drawable.imageReport));
             }
         }
-
-        BindWithActivities.sContext = getApplicationContext();
 
         toolbarAbout.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +54,6 @@ public class AboutActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (pBundle.containsKey("photoEnterprise") && !mPhotoWasDonwloaded) {
                     downloadPhoto(pBundle.getString("photoEnterprise"));
-                    return;
                 }
             }
         });

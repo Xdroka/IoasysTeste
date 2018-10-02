@@ -10,25 +10,25 @@ import java.util.regex.Pattern;
 
 import pedro.com.ioasysteste.R;
 import pedro.com.ioasysteste.controllers.ApiController;
-import pedro.com.ioasysteste.controllers.connector.BindWithActivities;
+import pedro.com.ioasysteste.view.connector.BindWithActivities;
 
 public class LoginActivity extends AppCompatActivity {
-    private Button mSiginButton;
     private EditText mEmailEditText;
     private EditText mPasswordEditText;
+    private BindWithActivities bind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mSiginButton = findViewById(R.id.siginButtonId);
+        Button mSiginButton = findViewById(R.id.siginButtonId);
         mEmailEditText = findViewById(R.id.emailEditTextId);
         mPasswordEditText = findViewById(R.id.passwordEditTextId);
 
-        BindWithActivities.sContext = getApplicationContext();
-        BindWithActivities.sEmailEditText = mEmailEditText;
-        BindWithActivities.sPasswordEditText = mPasswordEditText;
+        bind = new BindWithActivities(this);
+        bind.setmEmailEditText(mEmailEditText);
+        bind.setmPasswordEditText(mPasswordEditText);
 
         mSiginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,13 +45,14 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+
     private void callingAuthenticationAPI() {
         ApiController apiController = new ApiController();
         apiController.setUser(mEmailEditText.getText().toString(),
                 mPasswordEditText.getText().toString()
         );
 //        apiController.setUser("testeapple@ioasys.com.br", "12341234");
-        apiController.callingAuth();
+        apiController.callingAuth(bind);
     }
 
     private boolean isEmail(String email) {

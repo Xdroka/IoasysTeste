@@ -16,7 +16,7 @@ public class RecyclerHolder extends RecyclerView.ViewHolder {
     public ImageView pEnterprisePhotoImageView;
     public CardView pItemCardView;
 
-    public RecyclerHolder(View itemView) {
+    RecyclerHolder(View itemView) {
         super(itemView);
         pEnterpriseNameTextView = itemView.findViewById(R.id.enterpriseNameId);
         pEnterpriseTypeTextView = itemView.findViewById(R.id.enterpriseTypeId);

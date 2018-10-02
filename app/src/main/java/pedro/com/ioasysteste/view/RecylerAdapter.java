@@ -1,5 +1,6 @@
 package pedro.com.ioasysteste.view;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,21 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.target.Target;
 
 import java.util.List;
 
 import pedro.com.ioasysteste.R;
 import pedro.com.ioasysteste.controllers.ApiController;
-import pedro.com.ioasysteste.controllers.connector.BindWithActivities;
+import pedro.com.ioasysteste.view.connector.BindWithActivities;
 import pedro.com.ioasysteste.models.data.Enterprise;
 
 public class RecylerAdapter extends RecyclerView.Adapter<RecyclerHolder> {
     private List<Enterprise> mEnterprises;
+    private Context mContext;
 
-    public RecylerAdapter(List<Enterprise> Enterprises) {
+    public RecylerAdapter(List<Enterprise> Enterprises, Context context) {
         this.mEnterprises = Enterprises;
+        this.mContext = context;
     }
 
     @NonNull
@@ -34,22 +35,23 @@ public class RecylerAdapter extends RecyclerView.Adapter<RecyclerHolder> {
     @Override
     public void onBindViewHolder(@NonNull RecyclerHolder holder, final int position) {
 
-        holder.pEnterpriseNameTextView.setText(mEnterprises.get(position).getEnterpriseName());
-        holder.pEnterpriseTypeTextView.setText(mEnterprises.get(position).getEnterpriseType().getEnterpriseTypeName());
-        holder.pEnterpriseCountryTextView.setText(mEnterprises.get(position).getCountry());
+        final Enterprise enterprise = mEnterprises.get(position);
+        holder.pEnterpriseNameTextView.setText(enterprise.getEnterpriseName());
+        holder.pEnterpriseTypeTextView.setText(enterprise.getEnterpriseType().getEnterpriseTypeName());
+        holder.pEnterpriseCountryTextView.setText(enterprise.getCountry());
 
-        if (mEnterprises.get(position).getPhoto() != null
-                && (!mEnterprises.get(position).getPhoto().toString().equals(""))) {
+        if (enterprise.getPhoto() != null
+                && (!enterprise.getPhoto().toString().equals(""))) {
 
-            Glide.with(BindWithActivities.sContext)
-                    .load(ApiController.BASE_URL + mEnterprises.get(position).getPhoto().toString())
+            Glide.with(mContext)
+                    .load(ApiController.BASE_URL + enterprise.getPhoto().toString())
                     .placeholder(R.drawable.loading)
                     .error(R.drawable.download)
                     .into(holder.pEnterprisePhotoImageView);
 
         } else {
             holder.pEnterprisePhotoImageView.setImageDrawable(
-                    BindWithActivities.sContext.getDrawable(
+                    mContext.getDrawable(
                             R.drawable.imageReport
                     )
             );
@@ -58,7 +60,8 @@ public class RecylerAdapter extends RecyclerView.Adapter<RecyclerHolder> {
         holder.pItemCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BindWithActivities.toAboutActivity(mEnterprises.get(position));
+                BindWithActivities bind = new BindWithActivities(mContext);
+                bind.toAboutActivity(enterprise);
             }
         });
 

@@ -27,7 +27,8 @@
                 android:fadingEdge="none"
                 android:fitsSystemWindows="true"
                 android:foregroundGravity="center"
-                android:src="@drawable/logo_nav" />
+                android:src="@drawable/logo_nav"
+                android:contentDescription="@string/todo" />
 
         </android.support.v7.widget.Toolbar>
 
